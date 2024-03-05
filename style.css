@@ -1,0 +1,24 @@
+main {
+    min-height: 75%;
+    background-color: aquamarine;
+}
+
+ul{
+    padding:  0;
+    text-align: left;
+    list-style: none
+}
+
+li{
+    display: flex;
+}
+
+.icono{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+#rojo{
+    background-color: red;
+}
