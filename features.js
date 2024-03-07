@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }   
 
         listItem.innerHTML = `<strong>$${montoValue.toFixed(2)}</strong>`;
+        listItem.style.fontSize  = "20px"
+        listItem.style.fontFamily = "arial"
         
         listItem.insertBefore(circleDiv, listItem.firstChild);
         montoList.appendChild(listItem);
@@ -39,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         montoInput.value = '';
     });
 });
-
 
 function changeColor(className) {
     element.style.backgroundColor = randomColor;
