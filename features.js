@@ -11,13 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Por favor, ingrese un monto válido.');
             return;
         }
-
+        
         // Agregar el monto a la lista
         const listItem = document.createElement('li');
-        listItem.textContent = `$${montoValue.toFixed(2)}`;
+        const circleDiv = document.createElement('div');
+        circleDiv.classList.add('icono');
+        
+        listItem.innerHTML = `<strong>$${montoValue.toFixed(2)}</strong>`;
+        
+        listItem.insertBefore(circleDiv, listItem.firstChild);
         montoList.appendChild(listItem);
         
-
         // Limpiar el campo de entrada
         montoInput.value = '';
     });
