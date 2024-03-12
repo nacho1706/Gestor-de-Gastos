@@ -42,8 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
         montoInput.value = '';
 
         // Agregar elementos al circulo
-        let average = averageAmount(arrayValues);
-        console.log(average);
+        console.log(graph_Porcentage(arrayValues));
+        data.datasets[0].data = graph_Porcentage(arrayValues);
+        doughnutChart.update();
+        
     });
 });
 
@@ -51,14 +53,19 @@ function changeColor(className) {
     element.style.backgroundColor = randomColor;
 }
 
-function averageAmount(array){
+function graph_Porcentage(array){
     let suma = 0;
-    for(let i = 0; i < array.length; i++){
+    let arrayPorcentage = [];
+
+    for(let i=0; i < array.length; i++){
         suma += array[i];
     }
-    const promedio = suma / array.length;
-    
-    return promedio;
+
+    for(let i=0; i < array.length; i++){
+        arrayPorcentage.push((array[i] * 100) / suma);
+    }
+
+    return arrayPorcentage;
 }
 
 function showButtons() {
