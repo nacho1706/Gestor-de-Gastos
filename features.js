@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             indexColor++;
             }   
 
-        listItem.innerHTML = `<strong>$${montoValue.toFixed(2)} ${montoDescription}</strong>`;
+        listItem.innerHTML = `<strong>$${montoValue.toFixed(2)} &nbsp--->&nbsp ${montoDescription}</strong>`;            //&nbsp es un espacio en HTML
         listItem.style.fontSize  = "20px"
         listItem.style.fontFamily = "arial"
         

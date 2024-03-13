@@ -1,6 +1,12 @@
 main {
-    min-height: 75%;
-    background-color: aquamarine;
+    min-height: 90vh;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+}
+
+footer{
+    min-height: 20vh;
 }
 
 ul{
@@ -29,6 +35,17 @@ a{
     border: solid;
     border-radius: 5%;
     background-color: lightgray;
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        display: block;
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
 .hamburger-btn:hover{
