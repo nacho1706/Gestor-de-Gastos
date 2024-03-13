@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('form_amount');
     const montoList = document.getElementById('amount_list');
-    let arrayValues = []
+    let arrayValues = [];
     let arrayColors = [];
     let indexColor = 0;
 
@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const montoInput = document.getElementById('amount');
         const montoValue = parseFloat(montoInput.value);
+        const montoInputDescription = document.getElementById('description');   // Esto y la linea de abajo no pueden hacerse en una sola linea porque sino no se limpiaria el campo
+        const montoDescription = montoInputDescription.value                    // importante el .value para que el testo se pase a String
 
         if (isNaN(montoValue)) {
             alert('Por favor, ingrese un monto válido.');
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Agrega un color random a la pila 
         arrayColors.push('#' + Math.floor(Math.random()*16777215).toString(16));
-
+        console.log(arrayColors);
         // Agregar el monto a la lista
         const listItem = document.createElement('li');
         const circleDiv = document.createElement('div');
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             indexColor++;
             }   
 
-        listItem.innerHTML = `<strong>$${montoValue.toFixed(2)}</strong>`;
+        listItem.innerHTML = `<strong>$${montoValue.toFixed(2)} ${montoDescription}</strong>`;
         listItem.style.fontSize  = "20px"
         listItem.style.fontFamily = "arial"
         
@@ -40,28 +42,28 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Limpiar el campo de entrada
         montoInput.value = '';
+        montoInputDescription.value = '';
 
         // Agregar elementos al circulo
-        console.log(graph_Porcentage(arrayValues));
-        data.datasets[0].data = graph_Porcentage(arrayValues);
+        console.log(graphPorcentage(arrayValues));
+        data.datasets[0].data = graphPorcentage(arrayValues);   //llamado a la funcion que calcula los porcentajes de cada input en base al 100%
+        data.datasets[0].backgroundColor = arrayColors;         //introduce los colores correspondientes a cada uno de estos
         doughnutChart.update();
         
     });
 });
 
-function changeColor(className) {
-    element.style.backgroundColor = randomColor;
-}
 
-function graph_Porcentage(array){
+
+function graphPorcentage(array){
     let suma = 0;
     let arrayPorcentage = [];
 
-    for(let i=0; i < array.length; i++){
+    for(let i = 0; i < array.length; i++){
         suma += array[i];
     }
 
-    for(let i=0; i < array.length; i++){
+    for(let i = 0; i < array.length; i++){
         arrayPorcentage.push((array[i] * 100) / suma);
     }
 
@@ -89,11 +91,7 @@ const data = {
     datasets: [{
         label: '%',
         data: [],     //porcentaje del total
-        backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-        ],
+        backgroundColor: [],  //color 
         hoverOffset: 4
     }]
 };
