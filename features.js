@@ -1,3 +1,4 @@
+import {createDoughnutChart, updateDoughnutChart} from './scripts/doughnut-Chart.js'
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('form_amount');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             colors : [],
             indexColor : 0
         }};
-
+    createDoughnutChart();
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -48,16 +49,15 @@ document.addEventListener('DOMContentLoaded', function() {
         montoInputDescription.value = '';
 
         // Agregar elementos al circulo
-        console.log(graphPorcentage(InputData.arrayValues));
-        data.datasets[0].data = graphPorcentage(InputData.arrayValues);   //llamado a la funcion que calcula los porcentajes de cada input en base al 100%
-        data.datasets[0].backgroundColor = InputData.dataColors.colors;         //introduce los colores correspondientes a cada uno de estos
-        doughnutChart.update();
+        const percentage = graphPorcentage(InputData.arrayValues);
+        const color = InputData.dataColors.colors;
+        updateDoughnutChart(percentage, color);
         
-    });
-});
+                
+            });
+        });
 
-
-
+        
 function graphPorcentage(array){
     let suma = 0;
     let arrayPorcentage = [];
@@ -83,34 +83,3 @@ function showButtons() {
         }
     });
 }
-
-// COMO NO ESTAMOS USANDO UN FRAMEWORK COMO NODE.JS NO SE PUEDE EXPORTAR NI IMPORTAR ELEMENTOS A OTRO ARCHIVO,
-// POR TANTO EL SIGUIENTE CODIGO ESTARÁ MEJOR OPTIMIZADO AL IMPLENTAR LA MISMA
-
-//DOUGHNUT.JS (Nombre que tendria el archivo) (Utilizacion de libreria Chart.js)
-
-const data = {
-    labels: [],
-    datasets: [{
-        label: '%',
-        data: [],     //porcentaje del total
-        backgroundColor: [],  //color 
-        hoverOffset: 4
-    }]
-};
-
-// Options for the doughnut chart
-const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-};
-
-// Get the context of the canvas element
-const ctx = document.getElementById('doughnutChart').getContext('2d');
-
-// Create the doughnut chart
-const doughnutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: data,
-    options: options
-});
