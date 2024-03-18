@@ -2,9 +2,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('form_amount');
     const montoList = document.getElementById('amount_list');
-    let arrayValues = [];
-    let arrayColors = [];
-    let indexColor = 0;
+    let InputData = {
+        arrayValues : [],
+        dataColors : {
+            colors : [],
+            indexColor : 0
+        }};
 
 
     form.addEventListener('submit', function(event) {
@@ -17,11 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isNaN(montoValue)) {
             alert('Por favor, ingrese un monto válido.');
             return;
-        } else arrayValues.push(montoValue);
+        } else InputData.arrayValues.push(montoValue);
         
         // Agrega un color random a la pila 
-        arrayColors.push('#' + Math.floor(Math.random()*16777215).toString(16));
-        console.log(arrayColors);
+        InputData.dataColors.colors.push('#' + Math.floor(Math.random()*16777215).toString(16));
+
         // Agregar el monto a la lista
         const listItem = document.createElement('li');
         const circleDiv = document.createElement('div');
@@ -29,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         //Cambia el color del div
         if(event){
-            circleDiv.style.backgroundColor = arrayColors[indexColor];
-            indexColor++;
+            circleDiv.style.backgroundColor = InputData.dataColors.colors[InputData.dataColors.indexColor];
+            InputData.dataColors.indexColor++;
             }   
 
         listItem.innerHTML = `<strong>$${montoValue.toFixed(2)} &nbsp--->&nbsp ${montoDescription}</strong>`;            //&nbsp es un espacio en HTML
@@ -45,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
         montoInputDescription.value = '';
 
         // Agregar elementos al circulo
-        console.log(graphPorcentage(arrayValues));
-        data.datasets[0].data = graphPorcentage(arrayValues);   //llamado a la funcion que calcula los porcentajes de cada input en base al 100%
-        data.datasets[0].backgroundColor = arrayColors;         //introduce los colores correspondientes a cada uno de estos
+        console.log(graphPorcentage(InputData.arrayValues));
+        data.datasets[0].data = graphPorcentage(InputData.arrayValues);   //llamado a la funcion que calcula los porcentajes de cada input en base al 100%
+        data.datasets[0].backgroundColor = InputData.dataColors.colors;         //introduce los colores correspondientes a cada uno de estos
         doughnutChart.update();
         
     });
